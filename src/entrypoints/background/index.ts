@@ -3,6 +3,7 @@ import { registerStorageHandlers } from '@/entrypoints/background/handlers/stora
 
 export default defineBackground(() => {
   console.info('Hello background!');
+  console.info('VARIABLE:', import.meta.env.WXT_VARIABLE);
   registerPopupHandlers();
   registerStorageHandlers();
 });
