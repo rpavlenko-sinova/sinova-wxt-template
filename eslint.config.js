@@ -42,7 +42,6 @@ export default [
       },
     },
     rules: {
-      // ✅ General
       'no-console': ['warn', { allow: ['info', 'warn', 'error'] }],
       'max-params': ['error', 3],
       curly: ['error', 'all'],
@@ -51,7 +50,6 @@ export default [
       'no-var': 'error',
       'no-void': 'off',
 
-      // ✅ TypeScript
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
@@ -97,7 +95,6 @@ export default [
         { selector: 'interface', format: ['PascalCase'], prefix: ['I'] },
       ],
 
-      // ✅ React
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       'react/display-name': 'warn',
@@ -131,14 +128,11 @@ export default [
       'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
       'react/jsx-props-no-spreading': 'off',
 
-      // ✅ React Hooks
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
 
-      // ✅ React Refresh
       'react-refresh/only-export-components': ['warn', { allowExportNames: ['metadata'], allowConstantExport: true }],
 
-      // ✅ Import rules
       'no-restricted-imports': [
         'error',
         {

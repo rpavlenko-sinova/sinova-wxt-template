@@ -57,6 +57,29 @@ export const App = () => {
     }
   };
 
+  const getStorageValue = async () => {
+    try {
+      const response = await sendMessage(BridgeMessage.StorageGet, {
+        key: BridgeMessage.StorageGet,
+      });
+      console.info('Response from background:', response);
+    } catch (error) {
+      console.error('Error sending action:', error);
+    }
+  };
+
+  const setStorageValue = async (value: string) => {
+    try {
+      const response = await sendMessage(BridgeMessage.StorageSet, {
+        key: BridgeMessage.StorageSet,
+        value,
+      });
+      console.info('Response from background:', response);
+    } catch (error) {
+      console.error('Error sending action:', error);
+    }
+  };
+
   return (
     <>
       <div>
@@ -113,6 +136,18 @@ export const App = () => {
             style={{ padding: '8px 16px' }}
           >
             Send Reset Action
+          </Button>
+          <Button
+            onClick={() => getStorageValue()}
+            style={{ padding: '8px 16px' }}
+          >
+            Get Storage Value
+          </Button>
+          <Button
+            onClick={() => setStorageValue('test')}
+            style={{ padding: '8px 16px' }}
+          >
+            Set Storage Value
           </Button>
         </div>
 
