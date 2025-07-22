@@ -1,20 +1,20 @@
 export default defineContentScript({
   matches: ['*://*.wikipedia.org/*'],
   main() {
-    console.log('🎉 Wikipedia content script loaded!');
+    console.info('🎉 Wikipedia content script loaded!');
 
     function onPageLoad() {
-      console.log('📚 Wikipedia page loaded successfully!');
+      console.info('📚 Wikipedia page loaded successfully!');
 
       const pageTitle = document.title;
-      console.log('📖 Page title:', pageTitle);
+      console.info('📖 Page title:', pageTitle);
 
       const isArticlePage = document.querySelector('#content') !== null;
-      console.log('🔍 Is article page:', isArticlePage);
+      console.info('🔍 Is article page:', isArticlePage);
 
       const mainContent = document.querySelector('#mw-content-text');
       if (mainContent) {
-        console.log('📄 Main content found');
+        console.info('📄 Main content found');
       }
     }
 
@@ -25,7 +25,7 @@ export default defineContentScript({
     }
 
     window.addEventListener('load', () => {
-      console.log('🖼️ Page fully loaded with all resources');
+      console.info('🖼️ Page fully loaded with all resources');
     });
   },
 });

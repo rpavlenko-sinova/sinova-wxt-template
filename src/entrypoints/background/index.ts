@@ -1,6 +1,6 @@
-import { registerPopupHandlers } from './handlers/messageHandler';
+import { registerPopupHandlers } from '@/entrypoints/background/handlers/messageHandler';
 
 export default defineBackground(() => {
-  console.log('Hello background!');
+  console.info('Hello background!');
   registerPopupHandlers();
 });

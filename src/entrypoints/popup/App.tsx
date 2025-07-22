@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { sendMessage } from 'webext-bridge/popup';
 import reactLogo from '@/assets/react.svg';
 import wxtLogo from '/wxt.svg';
-import './App.css';
+import '@/entrypoints/popup/App.css';
 import { Button } from '@/components/ui/button';
 import { BridgeMessage } from '@/lib/enums/bridge';
 
-function App() {
+export const App = () => {
   const [count, setCount] = useState(0);
   const [messageStatus, setMessageStatus] = useState<string>('');
 
@@ -18,13 +18,17 @@ function App() {
       });
 
       if (response && typeof response === 'object' && 'message' in response) {
-        setMessageStatus(`Message sent successfully: ${response.message}`);
+        setMessageStatus(
+          `Message sent successfully: ${response.message && typeof response.message === 'string' ? response.message : `response value is not defined or an object ${JSON.stringify(response)}`}`,
+        );
       } else {
         setMessageStatus('Message sent successfully');
       }
-      console.log('Response from background:', response);
+      console.info('Response from background:', response);
     } catch (error) {
-      setMessageStatus(`Error sending message: ${error}`);
+      setMessageStatus(
+        `Error sending message: ${error && typeof error === 'string' ? error : `error value is not defined or an object ${JSON.stringify(error)}`}`,
+      );
       console.error('Error sending message:', error);
     }
   };
@@ -38,13 +42,17 @@ function App() {
       });
 
       if (response && typeof response === 'object' && 'action' in response) {
-        setMessageStatus(`Action sent successfully: ${response.action}`);
+        setMessageStatus(
+          `Action sent successfully: ${response.action && typeof response.action === 'string' ? response.action : `response value is not defined or an object ${JSON.stringify(response)}`}`,
+        );
       } else {
         setMessageStatus('Action sent successfully');
       }
-      console.log('Response from background:', response);
+      console.info('Response from background:', response);
     } catch (error) {
-      setMessageStatus(`Error sending action: ${error}`);
+      setMessageStatus(
+        `Error sending action: ${error && typeof error === 'string' ? error : `error value is not defined or an object ${JSON.stringify(error)}`}`,
+      );
       console.error('Error sending action:', error);
     }
   };
@@ -108,7 +116,7 @@ function App() {
           </Button>
         </div>
 
-        {messageStatus && (
+        {!!messageStatus && (
           <div
             style={{
               marginTop: '10px',
@@ -125,6 +133,4 @@ function App() {
       <p className="read-the-docs">Click on the WXT and React logos to learn more</p>
     </>
   );
-}
-
-export default App;
+};
