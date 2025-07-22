@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { sendMessage } from 'webext-bridge/popup';
+
 import reactLogo from '@/assets/react.svg';
 import wxtLogo from '/wxt.svg';
 import '@/entrypoints/popup/App.css';
 import { Button } from '@/components/ui/button';
 import { BridgeMessage } from '@/lib/enums/bridge';
+import { sendMessage } from '@/entrypoints/background/messaging/messaging';
 
 export const App = () => {
   const [count, setCount] = useState(0);
@@ -36,8 +37,7 @@ export const App = () => {
   const sendActionToBackground = async (action: string) => {
     try {
       const response = await sendMessage(BridgeMessage.PopupAction, {
-        action: action,
-        count: count,
+        action,
         timestamp: Date.now(),
       });
 

@@ -1,11 +1,11 @@
-import { onMessage } from 'webext-bridge/background';
 import { BridgeMessage } from '@/lib/enums/bridge';
 import { storage } from '#imports';
+import { onMessage } from '@/entrypoints/background/messaging/messaging';
 
 // documentation on storage: https://wxt.dev/storage.html
 
 export function registerStorageHandlers() {
-  onMessage(BridgeMessage.StorageGet, async ({ data }) => {
+  onMessage(BridgeMessage.StorageGet, async (data) => {
     try {
       if (typeof data !== 'object' || !data || (data && !('key' in data))) {
         return { success: false, error: 'Invalid key provided' };
@@ -32,7 +32,7 @@ export function registerStorageHandlers() {
     }
   });
 
-  onMessage(BridgeMessage.StorageSet, async ({ data }) => {
+  onMessage(BridgeMessage.StorageSet, async (data) => {
     try {
       console.info('Setting storage value:', data);
 
@@ -62,7 +62,7 @@ export function registerStorageHandlers() {
     }
   });
 
-  onMessage(BridgeMessage.StorageDelete, async ({ data }) => {
+  onMessage(BridgeMessage.StorageDelete, async (data) => {
     try {
       if (typeof data !== 'object' || !data || (data && !('key' in data))) {
         return { success: false, error: 'Invalid key provided' };
